@@ -1,0 +1,22 @@
+{
+    "imputation": {
+        "GRUD": {
+            "data": "1",
+            "region": "2"
+        }
+    },
+    "basemodel": {
+        "SkinCancer": {
+            "data": "0"
+        }
+    },
+    "PRS": {
+        "Plink": {
+            "basedata": "1",
+            "targetdata": "2",
+            "p_value": "0.1"
+        },
+        "VGPdiseases": {},
+        "Prsice-2": {}
+    }
+}
