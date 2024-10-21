@@ -20,7 +20,6 @@ const Home = () => {
             style={{
                 display: 'flex',
                 padding: '1%',
-                width: '55%',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -37,7 +36,7 @@ const Home = () => {
                     width: 'auto',
                     height: '10%',
                     paddingRight: '30px',
-                    alignSelf: '',
+                    // alignSelf: '',
                 }}
             />
         </div>

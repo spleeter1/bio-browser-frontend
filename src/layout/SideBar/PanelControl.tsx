@@ -1,4 +1,4 @@
-import SearchBar from '../../componets/SearchBar';
+import SearchBar from '../../components/SearchBar';
 
 const PanelControl = () => {
     return (

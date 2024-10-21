@@ -1,24 +1,34 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './layout/Header'
-import LeftPanel from './layout/SideBar/LeftPanel'
-import Home from './pages/Home'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css';
+import MainLayout from './layout/MainLayout';
+import Home from './pages/Home';
+import GRUDpage from './pages/GRUDpage';
 
-function App() {
-  // const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <MainLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/GRUD',
+                element: <GRUDpage />,
+            },
+            // {
+            //     path: '/contact',
+            //     element: <Contact />,
+            // },
+        ],
+    },
+]);
+const App = () => {
+    return <RouterProvider router={router} />;
+};
 
-  return (
-    <div style={{}}>
-      <Header/>
-      <div className='container' style={{ display:'flex',flexDirection:'row'}}>
-        <LeftPanel/>
-        <Home/>
-        {/* <RightPanel/>  */}
-      </div>
-    </div>
-  )
-}
-
-export default App
+export default App;

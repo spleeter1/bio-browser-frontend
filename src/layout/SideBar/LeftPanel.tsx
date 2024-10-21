@@ -1,6 +1,7 @@
 import PanelLeftTop from './PanelLeftTop';
 // import NestedList from './nestedList';
 import PanelControl from './PanelControl';
+import NestedList from './NestedList';
 
 const PanelLeft = () => {
     return (
@@ -8,7 +9,7 @@ const PanelLeft = () => {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                maxWidth: '25%',
+                // maxWidth: '25%',
                 border: '2px solid #e8ecee',
                 borderTop: 'none',
             }}
@@ -27,7 +28,7 @@ const PanelLeft = () => {
                 <PanelControl />
             </div>
 
-            {/* <NestedList /> */}
+            <NestedList />
         </div>
     );
 };
