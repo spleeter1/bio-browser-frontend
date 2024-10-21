@@ -14,14 +14,14 @@ const PanelLeft = () => {
             }}
         >
             <div
-                // style={{
-                //     maxWidth: '100%',
-                //     padding: '10% 5%',
-                //     display: 'flex',
-                //     flexDirection: 'column',
-                //     alignContent: 'space-around',
-                //     gap: '30px',
-                // }}
+                style={{
+                    maxWidth: '100%',
+                    padding: '10% 5%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignContent: 'space-around',
+                    gap: '30px',
+                }}
             >
                 <PanelLeftTop />
                 <PanelControl />

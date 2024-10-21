@@ -18,12 +18,12 @@ const Home = () => {
     return (
         <div
             style={{
-                // display: 'flex',
-                // padding: '1%',
-                // width: '55%',
-                // flexDirection: 'column',
-                // alignItems: 'center',
-                justifyContent:'center',
+                display: 'flex',
+                padding: '1%',
+                width: '55%',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
                 fontFamily: 'sans-serif',
                 // placeContent: ,
             }}
