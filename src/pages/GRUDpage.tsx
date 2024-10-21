@@ -40,7 +40,7 @@ const GRUDpage = () => {
             <LineSeparator content="Tool Parameters" />
             <div>
                 {/* <UploadParams uploadTitle={`Data GRUD`.toUpperCase()} /> */}
-                <ToolParameters />
+                <ToolParameters  />
             </div>
             {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
             {/* {isLoading === true ? <Loading /> : <></>} */}

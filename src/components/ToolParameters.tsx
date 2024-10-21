@@ -1,6 +1,10 @@
 import { Box, TextField, Typography } from '@mui/material';
 
-const ToolParameters = () => {
+type ToolParametersProps = {
+    //định nghĩa 1 thẻ là FORM ở đây
+};
+
+const ToolParameters: React.FC<ToolParametersProps> = () => {
     return (
         <div style={{ paddingBottom: '20px' }}>
             <div
@@ -26,18 +30,6 @@ const ToolParameters = () => {
                 {/* <thẻ component FORM></thẻ> */}
 
                 {/* <gọi thẻ nội dung> */}
-                <Typography
-                    sx={{
-                        paddingBottom: '2%',
-                        paddingLeft: '3%',
-                        paddingTop: '10px',
-                    }}
-                >
-                    <strong>
-                        To prepare the example dataset, the following files are
-                        required:
-                    </strong>
-                </Typography>
                 {/* </gọi> */}
             </div>
         </div>
