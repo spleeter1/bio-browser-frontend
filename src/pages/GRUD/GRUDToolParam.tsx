@@ -1,13 +1,13 @@
 import { Typography } from '@mui/material';
-import FormGRUD from '../pages/GRUD/FormGRUD';
+import FormGRUD from './FormGRUD';
 import { useState } from 'react';
-import Loading from './Loading';
+import Loading from '../../components/Loading';
 
-type ToolParametersProps = {
-    //định nghĩa 1 thẻ là FORM ở đây
+type GRUDToolParamProps = {
+    // định nghĩa 1 thẻ là thẻ FORM ở đây
 };
 
-const ToolParameters: React.FC<ToolParametersProps> = () => {
+const GRUDToolParam: React.FC<GRUDToolParamProps> = () => {
     const [response, setResponse] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -55,4 +55,4 @@ const ToolParameters: React.FC<ToolParametersProps> = () => {
         </div>
     );
 };
-export default ToolParameters;
+export default GRUDToolParam;

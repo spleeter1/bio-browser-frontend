@@ -6,7 +6,7 @@ const Home = () => {
     // const navigate = useNavigate();
     // async () => {
     //     try {
-    //         const apiUrl = import.meta.env.VITE_APP_BACKEND_URL || 'http://192.168.1.129:7777';
+    //         const apiUrl = import.meta.env.VITE_APP_BACKEND_URL || 'http://127.0.0.1:5000';
     //         const response = await axios.post(`${apiUrl}`, {});
     //         // console.log(response.status);
     //         console.log(response);

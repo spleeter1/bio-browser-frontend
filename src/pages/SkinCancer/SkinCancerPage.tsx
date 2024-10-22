@@ -1,5 +1,5 @@
 import LineSeparator from '../../components/LineSeparator';
-import GRUDToolParam from './GRUDToolParam';
+import SkinCancerToolParam from './SkinCancerToolParam';
 
 const GRUDpage = () => {
     return (
@@ -13,7 +13,7 @@ const GRUDpage = () => {
             <LineSeparator content="Tool Parameters" />
             <div>
                 {/* <UploadParams uploadTitle={`Data GRUD`.toUpperCase()} /> */}
-                <GRUDToolParam />
+                <SkinCancerToolParam />
             </div>
             {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
             {/* {isLoading === true ? <Loading /> : <></>} */}

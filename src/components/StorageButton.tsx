@@ -21,7 +21,7 @@ const StorageButton: React.FC<StorageButtonProps> = ({
         formData.append('image', newPic);
         try {
             const response = await axios.post(
-                `http://192.168.1.129:7777/${endpoint}/`,
+                `http://127.0.0.1:5000/${endpoint}/`,
                 formData,
                 {
                     headers: {
