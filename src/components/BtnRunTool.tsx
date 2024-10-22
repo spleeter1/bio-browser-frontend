@@ -1,10 +1,7 @@
 import { Button } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-type BtnRunToolProps = {
-    onClick: () => void;
-};
-const BtnRunTool: React.FC<BtnRunToolProps> = ({ onClick }) => {
+const BtnRunTool = () => {
     return (
         <Button
             sx={{
@@ -13,7 +10,8 @@ const BtnRunTool: React.FC<BtnRunToolProps> = ({ onClick }) => {
                 justifyContent: 'flex-end',
             }}
             variant="contained"
-            onClick={onClick}
+            // onClick={onClick}
+            type="submit"
         >
             <PlayArrowIcon />
             Run tool

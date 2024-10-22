@@ -19,7 +19,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 interface InputUploadUIProps {
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void; // Hàm xử lý thay đổi file
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputUploadUI: React.FC<InputUploadUIProps> = ({ onChange }) => {

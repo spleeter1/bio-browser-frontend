@@ -8,21 +8,12 @@
 // import Loading from '../component2/LoadingGif';
 // import { setFileKeys } from '../../redux/fileKeysSlice';
 
-import LineSeparator from '../components/LineSeparator';
-import ToolParameters from '../components/ToolParameters';
+import LineSeparator from '../../components/LineSeparator';
+import ToolParameters from '../../components/ToolParameters';
 
 // const data1 = getParams('GRUD');
 // console.log(data1);
 const GRUDpage = () => {
-    // const listParam = getParams('GRUD');
-
-    // const dispatch = useDispatch();
-    const fileKeys = ['files', 'files', 'files'];
-    // dispatch(setFileKeys(fileKeys));
-    // const url = useSelector((state: RootState) => state.urlStore.value);
-    // const isLoading = useSelector(
-    //     (state: RootState) => state.loadingStore.value
-    // );
     return (
         <div
             style={{
@@ -31,16 +22,10 @@ const GRUDpage = () => {
                 flexDirection: 'column',
             }}
         >
-            <div style={{ maxWidth: '100%' }}>
-                {/* <ToolHeader
-                    model={listParam[0].toUpperCase()}
-                    url="http://192.168.1.135:32100/grud"
-                /> */}
-            </div>
             <LineSeparator content="Tool Parameters" />
             <div>
                 {/* <UploadParams uploadTitle={`Data GRUD`.toUpperCase()} /> */}
-                <ToolParameters  />
+                <ToolParameters />
             </div>
             {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
             {/* {isLoading === true ? <Loading /> : <></>} */}

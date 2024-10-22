@@ -30,7 +30,7 @@ const MainLayout = () => {
                     <Outlet />
                     {/* <Home /> */}
                 </div>
-                <div className="history" style={{ maxWidth: '15%' }}></div>
+                <div className="history" style={{}}></div>
             </div>
         </div>
     );
