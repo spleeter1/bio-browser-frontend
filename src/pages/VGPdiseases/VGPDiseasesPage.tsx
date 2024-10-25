@@ -1,7 +1,7 @@
 import LineSeparator from '../../components/LineSeparator';
-import SkinCancerToolParam from './SkinCancerToolParam';
+import VGPDiseasesToolParam from './VGPDiseaseToolParam';
 
-const SkinCancerPage = () => {
+const VGPDiseasesPage = () => {
     return (
         <div
             style={{
@@ -13,7 +13,7 @@ const SkinCancerPage = () => {
             <LineSeparator content="Tool Parameters" />
             <div>
                 {/* <UploadParams uploadTitle={`Data GRUD`.toUpperCase()} /> */}
-                <SkinCancerToolParam />
+                <VGPDiseasesToolParam />
             </div>
             {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
             {/* {isLoading === true ? <Loading /> : <></>} */}
@@ -23,4 +23,4 @@ const SkinCancerPage = () => {
         </div>
     );
 };
-export default SkinCancerPage;
+export default VGPDiseasesPage;

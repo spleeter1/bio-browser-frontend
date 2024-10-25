@@ -32,18 +32,34 @@ const NestedList = () => {
                     <ListItemText primary={`GRUD`} />
                 </ListItemButton>
                 <CustomListSubHeader title={`BASEMODEL`} />
-                <ListItemButton key={`SkinCancer`} component={Link} to={``}>
+                <ListItemButton
+                    key={`SkinCancer`}
+                    component={Link}
+                    to={`skinCancer`}
+                >
                     <ListItemText primary={`SkinCancer`} />
                 </ListItemButton>
                 <CustomListSubHeader title={`PRS`} />
-                <ListItemButton key={`Plink`} component={Link} to={``}>
+                <ListItemButton key={`Plink`} component={Link} to={`Plink`}>
                     <ListItemText primary={`Plink`} />
                 </ListItemButton>
-                <ListItemButton key={`VGP Diseases`} component={Link} to={``}>
+                <ListItemButton
+                    key={`VGP Diseases`}
+                    component={Link}
+                    to={`VGP-Diseases`}
+                >
                     <ListItemText primary={`VGP Diseases`} />
                 </ListItemButton>
-                <ListItemButton key={`PRSice2`} component={Link} to={``}>
+                <ListItemButton key={`PRSice2`} component={Link} to={`PRSice2`}>
                     <ListItemText primary={`PRSice2`} />
+                </ListItemButton>
+                <CustomListSubHeader title={`SV_Deeplearning`} />
+                <ListItemButton
+                    key={`Filtering-SV`}
+                    component={Link}
+                    to={`FilteringSV`}
+                >
+                    <ListItemText primary={`Filtering SV`} />
                 </ListItemButton>
             </List>
         </div>

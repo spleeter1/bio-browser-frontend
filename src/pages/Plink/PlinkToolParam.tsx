@@ -1,22 +1,41 @@
 import { Typography } from '@mui/material';
-import FormGRUD from './FormGRUD';
+import FormPlink from './FormPlink';
 import { useState } from 'react';
 import Loading from '../../components/Loading';
+import OutputToDownload from '../../components/OutputToDownload';
 
-type GRUDToolParamProps = {
-    // định nghĩa 1 thẻ là thẻ FORM ở đây
-};
+type PlinkToolParamProps = {};
 
-const GRUDToolParam: React.FC<GRUDToolParamProps> = () => {
-    const [response, setResponse] = useState<any>(null);
+const PlinkToolParam: React.FC<PlinkToolParamProps> = () => {
+    const [, setResponse] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
+    const [downloadData, setDownloadData] = useState<{
+        filename: string;
+        fileContent: File | Blob | string;
+    } | null>(null);
 
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
     };
     const handleResponse = (response: any) => {
         setResponse(response);
-        console.log('', response);
+        console.log('RESPONSE', response);
+
+        if (response && response.data) {
+            handleDownload(response);
+        }
+    };
+    const handleDownload = (response: any) => {
+        const fileName = response.headers['content-disposition']
+            ? response.headers['content-disposition']
+                  .split('filename=')[1]
+                  .replace(/"/g, '')
+            : 'downloaded_file';
+
+        const blob = new Blob([response.data], {
+            type: response.headers['content-type'],
+        });
+        setDownloadData({ filename: fileName, fileContent: blob });
     };
     // useEffect(() => {}, []); //để gọi nội dung hướng dẫn
     return (
@@ -42,17 +61,24 @@ const GRUDToolParam: React.FC<GRUDToolParamProps> = () => {
                 </Typography>
 
                 {/* <thẻ component FORM></thẻ> */}
-                <FormGRUD
+                <FormPlink
                     onResponse={handleResponse}
                     onSubmitting={handleWaitResponse}
                 />
-
                 {/* <gọi thẻ nội dung> */}
                 {/* </gọi> */}
             </div>
-            {response !== null ? 'download here' : ''}
+
+            {downloadData && (
+                <div style={{ paddingTop: '20px' }}>
+                    <OutputToDownload
+                        filename={downloadData.filename}
+                        fileContent={downloadData.fileContent}
+                    />
+                </div>
+            )}
             {isLoading === true ? <Loading /> : ''}
         </div>
     );
 };
-export default GRUDToolParam;
+export default PlinkToolParam;

@@ -1,7 +1,7 @@
 import LineSeparator from '../../components/LineSeparator';
-import SkinCancerToolParam from './SkinCancerToolParam';
+import FilteringSVToolParam from './FilteringSVToolParam';
 
-const SkinCancerPage = () => {
+const FilteringSVPage = () => {
     return (
         <div
             style={{
@@ -12,8 +12,7 @@ const SkinCancerPage = () => {
         >
             <LineSeparator content="Tool Parameters" />
             <div>
-                {/* <UploadParams uploadTitle={`Data GRUD`.toUpperCase()} /> */}
-                <SkinCancerToolParam />
+                <FilteringSVToolParam />
             </div>
             {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
             {/* {isLoading === true ? <Loading /> : <></>} */}
@@ -23,4 +22,4 @@ const SkinCancerPage = () => {
         </div>
     );
 };
-export default SkinCancerPage;
+export default FilteringSVPage;
