@@ -3,6 +3,7 @@ import FormPRSice2 from './FormPRSice2';
 import { useState } from 'react';
 import Loading from '../../components/Loading';
 import OutputToDownload from '../../components/OutputToDownload';
+import StorageButton from '../../components/StorageButton';
 
 type PRSice2ToolParamProps = {
     // định nghĩa 1 thẻ là thẻ FORM ở đây
@@ -15,6 +16,7 @@ const PRSice2ToolParam: React.FC<PRSice2ToolParamProps> = () => {
         filename: string;
         fileContent: File | Blob | string;
     } | null>(null);
+    const [saveFilesData,setSaveFilesData] = useState<Blob[]|File[]>([]);
 
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
@@ -38,6 +40,8 @@ const PRSice2ToolParam: React.FC<PRSice2ToolParamProps> = () => {
             type: response.headers['content-type'],
         });
         setDownloadData({ filename: fileName, fileContent: blob });
+
+        setSaveFilesData(prevFiles => [...prevFiles,blob])
     };
     // useEffect(() => {}, []); //để gọi nội dung hướng dẫn
     return (
@@ -72,12 +76,17 @@ const PRSice2ToolParam: React.FC<PRSice2ToolParamProps> = () => {
             </div>
 
             {downloadData && (
+                <div> 
                 <div style={{ paddingTop: '20px' }}>
-                    <OutputToDownload
-                        filename={downloadData.filename}
-                        fileContent={downloadData.fileContent}
-                    />
+                <OutputToDownload
+                    filename={downloadData.filename}
+                    fileContent={downloadData.fileContent}
+                />
                 </div>
+                <div style={{ paddingTop: '20px' }}>
+                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                </div>
+            </div>
             )}
             {isLoading === true ? <Loading /> : ''}
         </div>

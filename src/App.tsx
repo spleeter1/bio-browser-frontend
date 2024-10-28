@@ -10,7 +10,7 @@ import SkinCancerPage from './pages/SkinCancer/SkinCancerPage';
 import PlinkPage from './pages/Plink/PlinkPage';
 import VGPDiseasesPage from './pages/VGPdiseases/VGPDiseasesPage';
 import PRSice2Page from './pages/PRSice2/PRSice2Page';
-import FilteringSVPage from './pages/FilteriingSV/FilteringSVPage';
+import SVDeeplearningPage from './pages/SVDeeplearning/SVDeeplearningPage';
 
 const router = createBrowserRouter([
     {
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
                 element: <PRSice2Page />,
             },
             {
-                path: 'FilteringSV',
-                element: <FilteringSVPage />,
+                path: 'SV_Deeplearning',
+                element: <SVDeeplearningPage/>,
             },
         ],
     },

@@ -3,6 +3,7 @@ import FormPlink from './FormPlink';
 import { useState } from 'react';
 import Loading from '../../components/Loading';
 import OutputToDownload from '../../components/OutputToDownload';
+import StorageButton from '../../components/StorageButton';
 
 type PlinkToolParamProps = {};
 
@@ -13,6 +14,7 @@ const PlinkToolParam: React.FC<PlinkToolParamProps> = () => {
         filename: string;
         fileContent: File | Blob | string;
     } | null>(null);
+    const [saveFilesData,setSaveFilesData] = useState<Blob[]|File[]>([]);
 
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
@@ -36,6 +38,8 @@ const PlinkToolParam: React.FC<PlinkToolParamProps> = () => {
             type: response.headers['content-type'],
         });
         setDownloadData({ filename: fileName, fileContent: blob });
+
+        setSaveFilesData(prevFiles => [...prevFiles,blob])
     };
     // useEffect(() => {}, []); //để gọi nội dung hướng dẫn
     return (
@@ -70,12 +74,17 @@ const PlinkToolParam: React.FC<PlinkToolParamProps> = () => {
             </div>
 
             {downloadData && (
+                <div> 
                 <div style={{ paddingTop: '20px' }}>
-                    <OutputToDownload
-                        filename={downloadData.filename}
-                        fileContent={downloadData.fileContent}
-                    />
+                <OutputToDownload
+                    filename={downloadData.filename}
+                    fileContent={downloadData.fileContent}
+                />
                 </div>
+                <div style={{ paddingTop: '20px' }}>
+                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                </div>
+            </div>
             )}
             {isLoading === true ? <Loading /> : ''}
         </div>

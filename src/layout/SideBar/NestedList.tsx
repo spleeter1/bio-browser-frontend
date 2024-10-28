@@ -53,13 +53,13 @@ const NestedList = () => {
                 <ListItemButton key={`PRSice2`} component={Link} to={`PRSice2`}>
                     <ListItemText primary={`PRSice2`} />
                 </ListItemButton>
-                <CustomListSubHeader title={`SV_Deeplearning`} />
+                <CustomListSubHeader title={`Filtering SV`} />
                 <ListItemButton
-                    key={`Filtering-SV`}
+                    key={`SV_Deeplearning`}
                     component={Link}
-                    to={`FilteringSV`}
+                    to={`SV_Deeplearning`}
                 >
-                    <ListItemText primary={`Filtering SV`} />
+                    <ListItemText primary={`SV Deeplearning`} />
                 </ListItemButton>
             </List>
         </div>

@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material';
-import Loading from '../../components/Loading';
-import OutputToDownload from '../../components/OutputToDownload';
+// import Loading from '../../components/Loading';
+// import OutputToDownload from '../../components/OutputToDownload';
 import FormVGPDiseases from './FormVGPDiseases';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const VGPDiseasesToolParam = () => {
     // const [, setResponse] = useState<any>();
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     // const [downloadData, setDownloadData] = useState<{
     //     filename: string;
     //     fileContent: File | Blob | string;
@@ -71,7 +71,7 @@ const VGPDiseasesToolParam = () => {
                     />
                 </div>
             )} */}
-            {isLoading === true ? <Loading /> : ''}
+            {/* {isLoading === true ? <Loading /> : ''} */}
         </div>
     );
 };

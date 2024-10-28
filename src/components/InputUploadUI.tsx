@@ -23,6 +23,13 @@ interface InputUploadUIProps {
 }
 
 const InputUploadUI: React.FC<InputUploadUIProps> = ({ onChange }) => {
+    const handleFileChange = (event : ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            const fileNames = Array.from(event.target.files).map(file => file.name).join('; ');
+            alert(`Files uploaded: ${fileNames}`);
+        }
+        onChange(event);
+    }
     return (
         <div>
             <Button
@@ -36,7 +43,7 @@ const InputUploadUI: React.FC<InputUploadUIProps> = ({ onChange }) => {
                 }}
             >
                 Upload file
-                <VisuallyHiddenInput type="file" onChange={onChange} multiple />
+                <VisuallyHiddenInput type="file" onChange={handleFileChange} multiple />
             </Button>
         </div>
     );

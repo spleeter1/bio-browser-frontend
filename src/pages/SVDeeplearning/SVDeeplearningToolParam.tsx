@@ -2,16 +2,18 @@ import { Typography } from '@mui/material';
 import { useState } from 'react';
 import Loading from '../../components/Loading';
 import OutputToDownload from '../../components/OutputToDownload';
-import FormFilteringSV from './FormFilteringSV';
+import FormSVDeeplearning from './FormSVDeeplearning';
+import StorageButton from '../../components/StorageButton';
 
-type FilteriingSVToolParamProps = {};
-const FilteringSVToolParam: React.FC<FilteriingSVToolParamProps> = () => {
+type FilteringSVToolParamProps = {};
+const FilteringSVToolParam: React.FC<FilteringSVToolParamProps> = () => {
     const [, setResponse] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
     const [downloadData, setDownloadData] = useState<{
         filename: string;
         fileContent: File | Blob | string;
     } | null>(null);
+    const [saveFilesData,setSaveFilesData] = useState<Blob[]|File[]>([]);
 
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
@@ -35,6 +37,8 @@ const FilteringSVToolParam: React.FC<FilteriingSVToolParamProps> = () => {
             type: response.headers['content-type'],
         });
         setDownloadData({ filename: fileName, fileContent: blob });
+
+        setSaveFilesData(prevFiles => [...prevFiles,blob])
     };
     // useEffect(() => {}, []); //để gọi nội dung hướng dẫn
     return (
@@ -60,7 +64,7 @@ const FilteringSVToolParam: React.FC<FilteriingSVToolParamProps> = () => {
                 </Typography>
 
                 {/* <thẻ component FORM></thẻ> */}
-                <FormFilteringSV
+                <FormSVDeeplearning
                     onResponse={handleResponse}
                     onSubmitting={handleWaitResponse}
                 />
@@ -69,12 +73,17 @@ const FilteringSVToolParam: React.FC<FilteriingSVToolParamProps> = () => {
             </div>
 
             {downloadData && (
-                <div style={{ paddingTop: '20px' }}>
-                    <OutputToDownload
-                        filename={downloadData.filename}
-                        fileContent={downloadData.fileContent}
-                    />
-                </div>
+               <div> 
+               <div style={{ paddingTop: '20px' }}>
+               <OutputToDownload
+                   filename={downloadData.filename}
+                   fileContent={downloadData.fileContent}
+               />
+               </div>
+               <div style={{ paddingTop: '20px' }}>
+                   <StorageButton files={saveFilesData} endpoint='GRUD' />
+               </div>
+           </div>
             )}
             {isLoading === true ? <Loading /> : ''}
         </div>

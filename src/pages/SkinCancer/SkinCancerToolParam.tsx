@@ -2,6 +2,8 @@ import { Typography } from '@mui/material';
 import { useState } from 'react';
 import Loading from '../../components/Loading';
 import FormSkinCancer from './FormSkinCancer';
+import OutputToDownload from '../../components/OutputToDownload';
+import StorageButton from '../../components/StorageButton';
 
 const SkinCancerToolParam = () => {
     const [response, setResponse] = useState<{
@@ -9,6 +11,11 @@ const SkinCancerToolParam = () => {
         content: string;
     } | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [downloadData, setDownloadData] = useState<{
+        filename: string;
+        fileContent: File | Blob | string;
+    } | null>(null);
+    const [saveFilesData,setSaveFilesData] = useState<Blob[]|File[]>([]);
 
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
@@ -75,6 +82,20 @@ const SkinCancerToolParam = () => {
                         </Typography>
                     </div>
                 </div>
+            )}
+            {downloadData && (
+            <div> 
+                <div style={{ paddingTop: '20px' }}>
+                <OutputToDownload
+                    filename={downloadData.filename}
+                    fileContent={downloadData.fileContent}
+                />
+                </div>
+                <div style={{ paddingTop: '20px' }}>
+                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                </div>
+            </div>
+             
             )}
             {isLoading === true ? <Loading /> : ''}
         </div>

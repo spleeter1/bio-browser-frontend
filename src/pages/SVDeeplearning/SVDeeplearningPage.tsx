@@ -1,5 +1,5 @@
 import LineSeparator from '../../components/LineSeparator';
-import FilteringSVToolParam from './FilteringSVToolParam';
+import FilteringSVToolParam from './SVDeeplearningToolParam';
 
 const FilteringSVPage = () => {
     return (
@@ -14,8 +14,6 @@ const FilteringSVPage = () => {
             <div>
                 <FilteringSVToolParam />
             </div>
-            {/* {url !== '' ? <OutputGRUD url={url} /> : <></>} */}
-            {/* {isLoading === true ? <Loading /> : <></>} */}
             <LineSeparator content="Help" />
             <LineSeparator content="Tutorial" />
             <LineSeparator content="Help Forum" />

@@ -19,7 +19,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
             <InputLabel>Bam file</InputLabel>
             <Select onChange={onChange} style={{ width: '150px' }}>
                 {options.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
+                    <MenuItem key='bam_file_name' value={option.value}>
                         {option.label}
                     </MenuItem>
                 ))}

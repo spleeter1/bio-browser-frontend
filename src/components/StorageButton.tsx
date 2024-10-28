@@ -2,39 +2,46 @@ import { Box, Typography } from '@mui/material';
 import StorageIcon from '@mui/icons-material/Storage';
 import axios from 'axios';
 
-type StorageButtonProps = {
-    data: Blob | string;
-    filename: string;
-    endpoint: string;
-};
-const StorageButton: React.FC<StorageButtonProps> = ({
-    data,
-    filename,
-    endpoint,
-}) => {
+type StorageButtonProps= {
+    files?: File[] | Blob[];
+    images?: string[]; 
+    otherData?: any;
+    endpoint:string;
+}
+
+const StorageButton: React.FC<StorageButtonProps> = ({ files, images, otherData,endpoint }) => {
     const handleFileUpload = async () => {
         const formData = new FormData();
-        formData.append('user', 'biomodel');
 
-        const newPic = new File([data], filename);
-        // console.log(filename);
-        formData.append('image', newPic);
+        if (files) {
+            files.forEach((file, index) => {
+                formData.append(`file_${index}`, file);
+            });
+        }
+
+        if (images) {
+            images.forEach((image, index) => {
+                formData.append(`image_${index}`, image);
+            });
+        }
+
+        if (otherData) {
+            Object.keys(otherData).forEach((key) => {
+                formData.append(key, otherData[key]);
+            });
+        }
+
         try {
-            const response = await axios.post(
-                `http://127.0.0.1:5000/${endpoint}/`,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                }
-            );
-
+            const response = await axios.post(`http://localhost:5000/${endpoint}/`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             if (response.status === 200) {
-                alert(JSON.stringify(response.data).toString());
+                alert('Data saved successfully');
             }
         } catch (error) {
-            console.error('Cannot store files', error);
+            alert('Failed to save data');
         }
     };
 
