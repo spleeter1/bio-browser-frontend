@@ -85,7 +85,7 @@ const GRUDToolParam: React.FC<GRUDToolParamProps> = () => {
                 />
                 </div>
                 <div style={{ paddingTop: '20px' }}>
-                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                    <StorageButton files={saveFilesData} endpoint='storeGRUD' />
                 </div>
             </div>
              

@@ -84,7 +84,7 @@ const PRSice2ToolParam: React.FC<PRSice2ToolParamProps> = () => {
                 />
                 </div>
                 <div style={{ paddingTop: '20px' }}>
-                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                    <StorageButton files={saveFilesData} endpoint='storePRSice2' />
                 </div>
             </div>
             )}

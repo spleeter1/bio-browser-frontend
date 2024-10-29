@@ -81,7 +81,7 @@ const FilteringSVToolParam: React.FC<FilteringSVToolParamProps> = () => {
                />
                </div>
                <div style={{ paddingTop: '20px' }}>
-                   <StorageButton files={saveFilesData} endpoint='GRUD' />
+                   <StorageButton files={saveFilesData} endpoint='storeSVDeeplearning' />
                </div>
            </div>
             )}

@@ -22,6 +22,11 @@ const SkinCancerToolParam = () => {
     };
     const handleResponse = (file: File, response: string) => {
         setResponse({ file, content: response });
+        const newFile = new File([file], `${response}.jpg`, {
+            type: file.type,
+        });
+        setDownloadData({ filename: response, fileContent: newFile });
+        setSaveFilesData(prevFile => [...prevFile,newFile]);
         console.log('RESPONSE', response);
     };
     // useEffect(() => {}, []); //để gọi nội dung hướng dẫn
@@ -92,7 +97,7 @@ const SkinCancerToolParam = () => {
                 />
                 </div>
                 <div style={{ paddingTop: '20px' }}>
-                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                    <StorageButton files={saveFilesData} endpoint='storeSkinCancer' />
                 </div>
             </div>
              

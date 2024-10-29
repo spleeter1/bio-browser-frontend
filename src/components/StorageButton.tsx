@@ -17,12 +17,14 @@ const StorageButton: React.FC<StorageButtonProps> = ({ files, images, otherData,
             files.forEach((file, index) => {
                 formData.append(`file_${index}`, file);
             });
+            console.log('store:',files);
         }
 
         if (images) {
             images.forEach((image, index) => {
                 formData.append(`image_${index}`, image);
             });
+            console.log('store:',images);
         }
 
         if (otherData) {

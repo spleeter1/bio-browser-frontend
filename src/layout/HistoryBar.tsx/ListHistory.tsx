@@ -13,7 +13,7 @@ const ListHistory = () => {
         try {
             const resp = await axios.post(
                 `http://127.0.0.1:5000/historyFiles/`,
-                ''
+                {withCredentials: true }
             );
             if (resp.status == 200) {
                 console.log(resp.data);

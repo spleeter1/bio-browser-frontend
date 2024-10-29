@@ -2,12 +2,10 @@ import {
     Box,
     FormControlLabel,
     Checkbox,
-    Button,
-    Typography,
 } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import React, { ChangeEvent, useState } from 'react';
+import BtnRunTool from '../../components/BtnRunTool';
 
 const options = [
     'PRSice-2 (EAS)',
@@ -21,13 +19,18 @@ const options = [
     'PRS-CS (CKB)',
     'PGS catalog',
 ];
+type FormVGPDiseasesProps = {
+    onResponse:  (images: string[]) => void; // Prop để truyền phản hồi lên component cha
+    onSubmitting: (isSubmitting: boolean) => void;
+}
+const FormVGPDiseases : React.FC<FormVGPDiseasesProps>= ({onResponse,onSubmitting}) => {
 
-const FormVGPDiseases = () => {
+
     const [checkedItems, setCheckedItems] = useState<boolean[]>(
         Array(options.length).fill(true)
     );
     const allChecked = checkedItems.every(Boolean);
-    const [images, setImages] = useState([]);
+    // const [images, setImages] = useState([]);
 
     const handleCheckboxChange =
         (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +46,19 @@ const FormVGPDiseases = () => {
         const { checked } = event.target;
         setCheckedItems(Array(options.length).fill(checked));
     };
-    const handleRunTool = async () => {
+    const handleRunTool = async (e:ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onSubmitting(true);
+
         try {
             const selectedOptions = options.filter(
                 (_, index) => checkedItems[index]
             );
             const tmp = selectedOptions.map(option => `'${option}'`).join(',');
             const res = `[${tmp}]`;
+
+            console.log(res)
+
             const formData = new FormData();
             formData.append('methods', res);
 
@@ -59,135 +68,113 @@ const FormVGPDiseases = () => {
             );
             // console.log(data);
             console.log('Server response:', response.data);
-            setImages(response.data.images);
-            // console.log(images);
-            // console.log(images.length);
+            // setImages(response.data.images);
+            
+            onResponse(response.data.images);
         } catch (error) {
             console.error('Error sending data:', error);
+            onSubmitting(false);
         } finally {
+            onSubmitting(false);
         }
     };
 
     return (
         <Box sx={{}}>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexWrap: 'wrap',
-                        gap: 1,
-                        padding: '0 7%',
-                    }}
-                >
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={allChecked}
-                                onChange={handleCheckboxAll}
-                                inputProps={{ 'aria-label': 'All' }}
-                            />
-                        }
-                        label="All"
-                    />
-
-                    {options.slice(0, 5).map((option, i) => (
+            <form onSubmit={handleRunTool}>
+                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexWrap: 'wrap',
+                            gap: 1,
+                            padding: '0 7%',
+                        }}
+                    >
                         <FormControlLabel
-                            key={option}
                             control={
                                 <Checkbox
-                                    onChange={handleCheckboxChange(i)}
-                                    checked={checkedItems[i]}
-                                    inputProps={{ 'aria-label': option }}
+                                    checked={allChecked}
+                                    onChange={handleCheckboxAll}
+                                    inputProps={{ 'aria-label': 'All' }}
                                 />
                             }
-                            label={option}
+                            label="All"
                         />
-                    ))}
-                </Box>
-                {/* cọt giữa */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexWrap: 'wrap',
-                        gap: 1,
-                        padding: '0 7%',
-                    }}
-                >
-                    {options.slice(5, 9).map((option, i) => {
-                        const idx = i + 5;
-                        return (
+
+                        {options.slice(0, 5).map((option, i) => (
                             <FormControlLabel
                                 key={option}
                                 control={
                                     <Checkbox
-                                        onChange={handleCheckboxChange(idx)}
-                                        checked={checkedItems[idx]}
+                                        onChange={handleCheckboxChange(i)}
+                                        checked={checkedItems[i]}
                                         inputProps={{ 'aria-label': option }}
                                     />
                                 }
                                 label={option}
                             />
-                        );
-                    })}
+                        ))}
+                    </Box>
+                    {/* cọt giữa */}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexWrap: 'wrap',
+                            gap: 1,
+                            padding: '0 7%',
+                        }}
+                    >
+                        {options.slice(5, 9).map((option, i) => {
+                            const idx = i + 5;
+                            return (
+                                <FormControlLabel
+                                    key={option}
+                                    control={
+                                        <Checkbox
+                                            onChange={handleCheckboxChange(idx)}
+                                            checked={checkedItems[idx]}
+                                            inputProps={{ 'aria-label': option }}
+                                        />
+                                    }
+                                    label={option}
+                                />
+                            );
+                        })}
+                    </Box>
+                    {/* cột phải */}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexWrap: 'wrap',
+                            gap: 1,
+                            padding: '0 7%',
+                        }}
+                    >
+                        {options.slice(-1).map((option, i) => {
+                            const idx = i + 9;
+                            return (
+                                <FormControlLabel
+                                    key={option}
+                                    control={
+                                        <Checkbox
+                                            onChange={handleCheckboxChange(idx)}
+                                            checked={checkedItems[idx]}
+                                            inputProps={{ 'aria-label': option }}
+                                        />
+                                    }
+                                    label={option}
+                                />
+                            );
+                        })}
+                    </Box>
                 </Box>
-                {/* cột phải */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexWrap: 'wrap',
-                        gap: 1,
-                        padding: '0 7%',
-                    }}
-                >
-                    {options.slice(-1).map((option, i) => {
-                        const idx = i + 9;
-                        return (
-                            <FormControlLabel
-                                key={option}
-                                control={
-                                    <Checkbox
-                                        onChange={handleCheckboxChange(idx)}
-                                        checked={checkedItems[idx]}
-                                        inputProps={{ 'aria-label': option }}
-                                    />
-                                }
-                                label={option}
-                            />
-                        );
-                    })}
-                </Box>
-            </Box>
-
-            <Button
-                sx={{
-                    display: 'flex',
-                    backgroundColor: '#133f6e',
-                    width: '150px',
-                    justifyContent: 'space-around',
-                    margin: '0 7%',
-                    marginTop: '20px',
-                }}
-                variant="contained"
-                onClick={handleRunTool}
-            >
-                <PlayArrowIcon />
-                <Typography>Run Tool</Typography>
-            </Button>
-
-            {images.length
-                ? images.map((image, index) => (
-                      <Box
-                          component="img"
-                          key={index}
-                          src={`data:image/jpeg;base64,${image}`}
-                          alt={`Image ${index}`}
-                          sx={{ width: '100%' }}
-                      />
-                  ))
-                : ''}
+                <BtnRunTool/>
+            </form>
+           
         </Box>
     );
 };

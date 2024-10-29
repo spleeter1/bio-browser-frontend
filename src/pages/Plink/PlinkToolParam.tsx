@@ -82,7 +82,7 @@ const PlinkToolParam: React.FC<PlinkToolParamProps> = () => {
                 />
                 </div>
                 <div style={{ paddingTop: '20px' }}>
-                    <StorageButton files={saveFilesData} endpoint='GRUD' />
+                    <StorageButton files={saveFilesData} endpoint='storePlink' />
                 </div>
             </div>
             )}
