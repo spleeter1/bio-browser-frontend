@@ -23,7 +23,7 @@ const Header = () => {
         window.location.href = '/';
     };
     const handleLogin = () => {
-        window.location.href = '/';
+        window.location.href = '/login';
     };
     return (
         <AppBar

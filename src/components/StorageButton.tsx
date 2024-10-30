@@ -2,43 +2,57 @@ import { Box, Typography } from '@mui/material';
 import StorageIcon from '@mui/icons-material/Storage';
 import axios from 'axios';
 
-type StorageButtonProps= {
+type StorageButtonProps = {
     files?: File[] | Blob[];
-    images?: string[]; 
+    images?: string[];
     otherData?: any;
-    endpoint:string;
-}
+    endpoint: string;
+};
 
-const StorageButton: React.FC<StorageButtonProps> = ({ files, images, otherData,endpoint }) => {
+const StorageButton: React.FC<StorageButtonProps> = ({
+    files,
+    images,
+    otherData,
+    endpoint,
+}) => {
     const handleFileUpload = async () => {
-        const formData = new FormData();
+        const ss = sessionStorage.getItem('user_id');
+        if (!ss) {
+            alert('please login');
+            return;
+        }
 
+        const formData = new FormData();
         if (files) {
             files.forEach((file, index) => {
-                formData.append(`file_${index}`, file);
+                formData.append(`file`, file);
             });
-            console.log('store:',files);
+            console.log('store:', files);
         }
 
         if (images) {
             images.forEach((image, index) => {
-                formData.append(`image_${index}`, image);
+                formData.append(`image`, image);
             });
-            console.log('store:',images);
+            console.log('store:', images);
         }
 
         if (otherData) {
-            Object.keys(otherData).forEach((key) => {
+            Object.keys(otherData).forEach(key => {
                 formData.append(key, otherData[key]);
             });
         }
 
         try {
-            const response = await axios.post(`http://localhost:5000/${endpoint}/`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await axios.post(
+                `http://localhost:5000/${endpoint}/`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
             if (response.status === 200) {
                 alert('Data saved successfully');
             }

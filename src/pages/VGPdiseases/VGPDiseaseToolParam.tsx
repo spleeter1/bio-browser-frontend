@@ -9,9 +9,9 @@ import StorageButton from '../../components/StorageButton';
 const VGPDiseasesToolParam = () => {
     const [, setResponse] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
-    const [saveFilesData,setSaveFilesData] = useState<Blob[]|File[]>([]);
-    const [images,setImages] = useState([]);
-    
+    const [saveFilesData, setSaveFilesData] = useState<Blob[] | File[]>([]);
+    const [images, setImages] = useState([]);
+
     const handleWaitResponse = (submitting: boolean) => {
         setIsLoading(submitting);
     };
@@ -28,20 +28,21 @@ const VGPDiseasesToolParam = () => {
             // for (let i = 0; i < byteString.length; i++) {
             //     arrayBuffer[i] = byteString.charCodeAt(i);
             // }
-    
-            const bl = new Blob([res], { type: 'image/jpeg' });
-            console.log('bl:',bl);
 
-            const fileName = res.substring(0, 10); 
+            const bl = new Blob([res], { type: 'image/jpeg' });
+            console.log('bl:', bl);
+
+            const fileName = res.substring(0, 10);
             return {
                 blob: bl,
-                name: `${fileName}.jpg`, 
+                name: `${fileName}.jpg`,
             };
         });
         setSaveFilesData(blobs);
-        console.log(blobs)
+        console.log(saveFilesData);
+        console.log(blobs);
     };
-    
+
     return (
         <div style={{ paddingBottom: '20px' }}>
             <div
@@ -65,7 +66,10 @@ const VGPDiseasesToolParam = () => {
                 </Typography>
 
                 {/* <thẻ component FORM></thẻ> */}
-                <FormVGPDiseases onResponse={handleResponse} onSubmitting={handleWaitResponse} />
+                <FormVGPDiseases
+                    onResponse={handleResponse}
+                    onSubmitting={handleWaitResponse}
+                />
                 {/* <gọi thẻ nội dung> */}
                 {/* </gọi> */}
             </div>
@@ -81,12 +85,14 @@ const VGPDiseasesToolParam = () => {
                       />
                   ))
                 : ''}
-            {images.length>0 && 
-            (<div style={{ paddingTop: '20px' }}>
-                
-                <StorageButton files={saveFilesData} endpoint='storeVGPdiseases' />
-            </div>)
-            }
+            {images.length > 0 && (
+                <div style={{ paddingTop: '20px' }}>
+                    <StorageButton
+                        files={saveFilesData}
+                        endpoint="storeVGPdiseases"
+                    />
+                </div>
+            )}
             {isLoading === true ? <Loading /> : ''}
         </div>
     );
