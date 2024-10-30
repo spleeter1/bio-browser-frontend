@@ -2,19 +2,24 @@ import { Box } from '@mui/material';
 import logo from '../assets/logo.png';
 // import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
+// import { useEffect } from 'react';
 const Home = () => {
     // const navigate = useNavigate();
-    // async () => {
-    //     try {
-    //         const apiUrl = import.meta.env.VITE_APP_BACKEND_URL || 'http://127.0.0.1:5000';
-    //         const response = await axios.post(`${apiUrl}`, {});
-    //         // console.log(response.status);
-    //         console.log(response);
-    //         if (response.status === 200) navigate('/');
-    //     } catch (error) {
-    //         alert('lỗi');
-    //     }
-    // };
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.post('http://127.0.0.1:5000', {});
+    //             if (response.status === 200) {
+    //                 console.log('successfully');
+    //             } else {
+    //                 console.log('aa');
+    //                 navigate('/login');
+    //             }
+    //         } catch {}
+    //     };
+    //     fetchData;
+    // }, []);
     return (
         <div
             style={{

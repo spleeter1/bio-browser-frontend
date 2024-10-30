@@ -1,78 +1,127 @@
 import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-// import useNavigate from 'react-router-dom';
-import logo from "/src/assets/logo.png";
+    AppBar,
+    Box,
+    Button,
+    Container,
+    Toolbar,
+    Tooltip,
+    Typography,
+} from '@mui/material';
+import logo from '/src/assets/logo.png';
+import { useEffect, useState } from 'react';
 const Header = () => {
-  // const navigate = useNavigate();
-  // const handleClick = () => {
-  //     navigate(`/`);
-  // };
-  return (
-    <AppBar
-      sx={{
-        maxWidth: "100%",
-        // position: 'unset',
-        position: "fixed",
-      }}
-    >
-      <Container
-        sx={{
-          backgroundColor: "white",
-          "@media(min-width:100px)": {
-            maxWidth: "100%",
-          },
-          boxShadow: "0px 4px 8px   rgba(172, 176, 250,2)",
-        }}
-      >
-        <Toolbar
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+    const [username, setUsername] = useState('');
+    useEffect(() => {
+        const storedUsername = sessionStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
+    const handleLogout = () => {
+        sessionStorage.removeItem('user_id');
+        sessionStorage.removeItem('username');
+        window.location.href = '/';
+    };
+    const handleLogin = () => {
+        window.location.href = '/';
+    };
+    return (
+        <AppBar
+            sx={{
+                maxWidth: '100%',
+                // position: 'unset',
+                position: 'fixed',
+            }}
         >
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Box
-              component="img"
-              src={logo}
-              alt="VinBigData Logo"
-              sx={{
-                width: "auto",
-                height: "30px",
-                paddingRight: "30px",
-              }}
-            />
-            <Box>
-              <Tooltip title="">
-                <Button
-                  sx={{
-                    fontStyle: "bold",
-                    color: "#40406d",
-                    fontFamily: "sans-serif",
-                  }}
-                  key="biomodel"
-                  // onClick={handleClick}
+            <Container
+                sx={{
+                    backgroundColor: 'white',
+                    '@media(min-width:100px)': {
+                        maxWidth: '100%',
+                    },
+                    boxShadow: '0px 4px 8px   rgba(172, 176, 250,2)',
+                }}
+            >
+                <Toolbar
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
                 >
-                  <strong>Biomodel Browser</strong>
-                </Button>
-              </Tooltip>
-            </Box>
-          </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <Box
+                            component="img"
+                            src={logo}
+                            alt="VinBigData Logo"
+                            sx={{
+                                width: 'auto',
+                                height: '30px',
+                                paddingRight: '30px',
+                            }}
+                        />
+                        <Box>
+                            <Tooltip title="">
+                                <Button
+                                    sx={{
+                                        fontStyle: 'bold',
+                                        color: '#40406d',
+                                        fontFamily: 'sans-serif',
+                                    }}
+                                    key="biomodel"
+                                    // onClick={handleClick}
+                                >
+                                    <strong>Biomodel Browser</strong>
+                                </Button>
+                            </Tooltip>
+                        </Box>
+                    </Box>
 
-          <Typography variant="h6" sx={{ color: "#40406d" }}>
-            Ver 1.0.0
-          </Typography>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
+                    {username ? (
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography variant="h6" sx={{ color: '#40406d' }}>
+                                {`Welcome, ${username}`}
+                            </Typography>
+                            <Button
+                                onClick={handleLogout}
+                                sx={{
+                                    width: ' 100px',
+                                    display: 'flex',
+                                    alignSelf: 'center',
+                                }}
+                            >
+                                <Typography sx={{ color: '#40406d' }}>
+                                    Logout
+                                </Typography>
+                            </Button>
+                        </div>
+                    ) : (
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography variant="h6" sx={{ color: '#40406d' }}>
+                                {`Welcome, Guest`}
+                            </Typography>
+                            <Button
+                                onClick={handleLogin}
+                                sx={{
+                                    width: ' 100px',
+                                    display: 'flex',
+                                    alignSelf: 'center',
+                                    margin: '0 20px',
+                                }}
+                            >
+                                <Typography sx={{ color: '#40406d' }}>
+                                    Login
+                                </Typography>
+                            </Button>
+                            <Typography variant="h6" sx={{ color: '#40406d' }}>
+                                @login_required Ver 1.0.0
+                            </Typography>
+                        </div>
+                    )}
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
 };
 export default Header;

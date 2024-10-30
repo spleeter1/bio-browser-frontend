@@ -2,8 +2,6 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import LeftPanel from './SideBar/LeftPanel';
 import HistoryBar from './HistoryBar.tsx/HistoryBar';
-// import Home from '../pages/Home';
-
 const MainLayout = () => {
     return (
         <div

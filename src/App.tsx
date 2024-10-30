@@ -11,14 +11,24 @@ import PlinkPage from './pages/Plink/PlinkPage';
 import VGPDiseasesPage from './pages/VGPdiseases/VGPDiseasesPage';
 import PRSice2Page from './pages/PRSice2/PRSice2Page';
 import SVDeeplearningPage from './pages/SVDeeplearning/SVDeeplearningPage';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
 
 const router = createBrowserRouter([
+    {
+        path: '/register',
+        element: <Register />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
+    },
     {
         path: '/',
         element: <MainLayout />,
         children: [
             {
-                path: '/',
+                path: '',
                 element: <Home />,
             },
             {
@@ -43,7 +53,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'SV_Deeplearning',
-                element: <SVDeeplearningPage/>,
+                element: <SVDeeplearningPage />,
             },
         ],
     },
