@@ -23,6 +23,7 @@ const StorageButton: React.FC<StorageButtonProps> = ({
         }
 
         const formData = new FormData();
+        // formData.append('user_id', ss);
         if (files) {
             files.forEach((file, index) => {
                 formData.append(`file`, file);
@@ -44,6 +45,8 @@ const StorageButton: React.FC<StorageButtonProps> = ({
         }
 
         try {
+            console.log('Form data:', Array.from(formData.entries()));
+
             const response = await axios.post(
                 `http://localhost:5000/${endpoint}/`,
                 formData,
@@ -51,6 +54,7 @@ const StorageButton: React.FC<StorageButtonProps> = ({
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
+                    withCredentials: true,
                 }
             );
             if (response.status === 200) {

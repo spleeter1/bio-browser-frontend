@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import logo from '/src/assets/logo.png';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 const Header = () => {
     const [username, setUsername] = useState('');
     useEffect(() => {
@@ -20,6 +21,18 @@ const Header = () => {
     const handleLogout = () => {
         sessionStorage.removeItem('user_id');
         sessionStorage.removeItem('username');
+        const logout = async () => {
+            try {
+                const response = await axios.post(
+                    'http://127.0.0.1/logout/',
+                    {}
+                );
+                console.log(response);
+            } catch {
+                console.log('err');
+            }
+        };
+        logout;
         window.location.href = '/';
     };
     const handleLogin = () => {

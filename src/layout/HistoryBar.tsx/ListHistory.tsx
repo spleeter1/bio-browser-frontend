@@ -5,6 +5,7 @@ import CollapseShowFile from './CollapseShowFile';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+axios.defaults.withCredentials = true;
 const ListHistory = () => {
     const [files, setFiles] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -13,7 +14,13 @@ const ListHistory = () => {
         try {
             const resp = await axios.post(
                 `http://127.0.0.1:5000/historyFiles/`,
-                {withCredentials: true }
+                {},
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true,
+                }
             );
             if (resp.status == 200) {
                 console.log(resp.data);

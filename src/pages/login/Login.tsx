@@ -2,19 +2,34 @@ import { Button, Link, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+axios.defaults.withCredentials = true;
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedin, setIsLoggedin] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const userId = sessionStorage.getItem('user_id');
+        if (userId) {
+            setIsLoggedin(true);
+        }
+    }, []);
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:5000/login/', {
-                username: username,
-                password: password,
-            });
+            const response = await axios.post(
+                'http://127.0.0.1:5000/login/',
+                {
+                    username: username,
+                    password: password,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
+
             console.log(response.status);
             if (response.status === 200) {
                 // localStorage.setItem('authToken', response.data.token);
@@ -22,19 +37,13 @@ const Login = () => {
                 sessionStorage.setItem('username', response.data.username);
                 setIsLoggedin(true);
                 alert('login successfully');
+                // window.location.href = '/';
                 navigate('/');
             }
         } catch (error) {
             console.error('Login failed', error);
             alert('Login failed!');
         }
-
-        useEffect(() => {
-            const token = localStorage.getItem('authToken');
-            if (token) {
-                setIsLoggedin(true);
-            }
-        }, []);
     };
 
     return (
