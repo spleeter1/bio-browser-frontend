@@ -9,24 +9,21 @@ import {
 } from '@mui/material';
 import logo from '/src/assets/logo.png';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../api';
 const Header = () => {
     const [username, setUsername] = useState('');
     useEffect(() => {
-        const storedUsername = sessionStorage.getItem('username');
+        const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
             setUsername(storedUsername);
         }
     }, []);
     const handleLogout = () => {
-        sessionStorage.removeItem('user_id');
-        sessionStorage.removeItem('username');
+        localStorage.removeItem('username');
         const logout = async () => {
             try {
-                const response = await axios.post(
-                    'http://127.0.0.1/logout/',
-                    {}
-                );
+                const response = await api.post('/logout/', {});
                 console.log(response);
             } catch {
                 console.log('err');

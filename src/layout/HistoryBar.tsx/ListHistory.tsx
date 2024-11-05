@@ -2,38 +2,32 @@ import { Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CollapseShowFile from './CollapseShowFile';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+// import axios from 'axios';
+import { useCallback, useState } from 'react';
+import api from '../../api';
 
-axios.defaults.withCredentials = true;
 const ListHistory = () => {
     const [files, setFiles] = useState([]);
-    const [refresh, setRefresh] = useState(false);
+    const [, setRefresh] = useState(false);
 
-    const showHistoryFiles = async () => {
+    const showHistoryFiles = useCallback(async () => {
         try {
-            const resp = await axios.post(
-                `http://127.0.0.1:5000/historyFiles/`,
-                {},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true,
-                }
-            );
-            if (resp.status == 200) {
-                console.log(resp.data);
-                setFiles(resp.data);
+            const response = await api.post(`/historyFiles/`, {});
+            if (response.status === 200) {
+                console.log(response.data);
+                setFiles(response.data);
+            } else {
+                setFiles([]);
             }
-        } catch (error) {}
-    };
+        } catch (error) {
+            console.error('Error fetching history files:', error);
+            setFiles([]);
+        }
+    }, []);
 
-    useEffect(() => {
-        showHistoryFiles();
-    }, [refresh]);
     const handleRefresh = () => {
-        setRefresh(!refresh);
+        showHistoryFiles();
+        setRefresh(false);
     };
 
     return (

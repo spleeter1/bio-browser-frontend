@@ -1,48 +1,62 @@
 import { Button, Link, TextField, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api';
 
-axios.defaults.withCredentials = true;
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedin, setIsLoggedin] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const userId = sessionStorage.getItem('user_id');
-        if (userId) {
-            setIsLoggedin(true);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const username = localStorage.getItem('username');
+    //     if (username) {
+    //         setIsLoggedin(true);
+    //         navigate('/');
+    //     }
+    // }, [isLoggedin, navigate]);
+    // function getCookie(name: string): string {
+    //     const value = `; ${document.cookie}`;
+    //     const parts = value.split(`; ${name}=`);
+    //     if (parts.length === 2) {
+    //         const cookieValue = parts.pop()?.split(';').shift();
+    //         return cookieValue ? cookieValue : '';
+    //     }
+    //     return '';
+    // }
+
+    function printAllCookies() {
+        const cookies = document.cookie.split(';');
+        cookies.forEach(cookie => {
+            const [name, value] = cookie.split('=').map(c => c.trim());
+            console.log(`Name: ${name}, Value: ${value}`);
+        });
+    }
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(
-                'http://127.0.0.1:5000/login/',
-                {
-                    username: username,
-                    password: password,
-                },
-                {
-                    withCredentials: true,
-                }
-            );
 
-            console.log(response.status);
+        try {
+            const response = await api.post('/login/', { username, password });
             if (response.status === 200) {
-                // localStorage.setItem('authToken', response.data.token);
-                sessionStorage.setItem('user_id', response.data.user_id);
-                sessionStorage.setItem('username', response.data.username);
+                localStorage.setItem('username', response.data.username);
+                localStorage.setItem(
+                    'access_token',
+                    response.data.access_token
+                );
+                localStorage.setItem(
+                    'refresh_token',
+                    response.data.refresh_token
+                );
                 setIsLoggedin(true);
-                alert('login successfully');
-                // window.location.href = '/';
+                console.log('respone login: ', response);
+                printAllCookies();
                 navigate('/');
             }
-        } catch (error) {
-            console.error('Login failed', error);
-            alert('Login failed!');
+        } catch (err) {
+            console.error('Login error', err);
         }
     };
 

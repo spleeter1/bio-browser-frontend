@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import StorageIcon from '@mui/icons-material/Storage';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../api';
 
 type StorageButtonProps = {
     files?: File[] | Blob[];
@@ -16,23 +17,22 @@ const StorageButton: React.FC<StorageButtonProps> = ({
     endpoint,
 }) => {
     const handleFileUpload = async () => {
-        const ss = sessionStorage.getItem('user_id');
-        if (!ss) {
+        const ls = localStorage.getItem('username');
+        if (!ls) {
             alert('please login');
             return;
         }
 
         const formData = new FormData();
-        // formData.append('user_id', ss);
         if (files) {
-            files.forEach((file, index) => {
+            files.forEach((file) => {
                 formData.append(`file`, file);
             });
             console.log('store:', files);
         }
 
         if (images) {
-            images.forEach((image, index) => {
+            images.forEach((image) => {
                 formData.append(`image`, image);
             });
             console.log('store:', images);
@@ -47,7 +47,7 @@ const StorageButton: React.FC<StorageButtonProps> = ({
         try {
             console.log('Form data:', Array.from(formData.entries()));
 
-            const response = await axios.post(
+            const response = await api.post(
                 `http://localhost:5000/${endpoint}/`,
                 formData,
                 {
