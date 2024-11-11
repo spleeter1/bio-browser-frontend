@@ -208,11 +208,11 @@ vite-env.d.ts: Khai báo môi trường cho Vite, đảm bảo TypeScript hiểu
 
 - Hướng dẫn sử dụng chi tiết các tính năng của frontend.
 
-![Mô tả sidebar](./../readme-pictures/sideBar.png)
+![Mô tả sidebar](./readme-pictures/sideBar.png)
 
 - Giao diện người dùng (UI/UX) và cách tương tác với ứng dụng.
 
-![Chọn Upload file, upload những file cần thiết và chọn tham số phù hợp](/readme-pictures/GRUD-tool-example.png)
+![Chọn Upload file, upload những file cần thiết và chọn tham số phù hợp](readme-pictures/GRUD-tool-example.png)
 
 - Chọn Upload file, upload những file cần thiết và chọn tham số phù hợp
 
@@ -220,7 +220,7 @@ vite-env.d.ts: Khai báo môi trường cho Vite, đảm bảo TypeScript hiểu
 
 Sau khi kết quả được xử lý xong:
 Ta có 2 tuỳ chọn Tải file về máy hoặc Lưu trữ vào hệ thống
-![](/readme-pictures/download-file-btn.png)
+![](readme-pictures/download-file-btn.png)
 
 Nếu Lưu file vào hệ thống:
 
@@ -289,3 +289,9 @@ Sau khi bạn chạy lệnh trên, ngrok sẽ cung cấp cho bạn một URL cô
 Forwarding http://abcd1234.ngrok.io -> http://localhost:5173
 
 Đây chính là đường dẫn công cộng bạn có thể chia sẻ với người khác để họ có thể truy cập vào ứng dụng của bạn.
+
+---
+
+# License
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://genestory.ai/)
